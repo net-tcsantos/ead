@@ -1,5 +1,6 @@
 package com.university.ead.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -32,6 +33,7 @@ public class Student {
   private String firstName;
   private String lastName;
   private String email;
+  @JsonIgnore
   private String password;
   private String cpf;
   private String dob;
