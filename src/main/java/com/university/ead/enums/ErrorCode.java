@@ -6,7 +6,8 @@ import com.university.ead.exceptions.EadException;
 public enum ErrorCode {
   STUDENT_NOT_FOUND(100, "Student does not exist."),
   STUDENT_FOUND(101, "Student already exists."),
-  INVALID_ENUM(102, "Enum value provided has a value that do not match.");
+  INVALID_ENUM(102, "Enum value provided has a value that do not match."),
+  EMAIL(103, "Field has failed validation.");
   private final int code;
   private final String message;
 
@@ -17,7 +18,7 @@ public enum ErrorCode {
 
   public static ErrorCode fromValue(String v) {
     for (ErrorCode c : ErrorCode.values()) {
-      if (c.name().equals(v)) {
+      if (c.name().equalsIgnoreCase(v)) {
         return c;
       }
     }

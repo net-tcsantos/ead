@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,14 +24,14 @@ public class StudentController {
   private final StudentService service;
 
   @PostMapping("/students")
-  public ResponseEntity<StudentResponseDto> saveStudent(@RequestBody StudentRequestDto dto) {
+  public ResponseEntity<StudentResponseDto> saveStudent(@Validated @RequestBody StudentRequestDto dto) {
     return ResponseEntity.status(HttpStatus.CREATED)
             .contentType(MediaType.APPLICATION_JSON)
             .body(service.saveStudent(dto));
   }
 
   @GetMapping("/students/{id}")
-  public ResponseEntity<StudentResponseDto> saveStudent(@PathVariable UUID id) {
+  public ResponseEntity<StudentResponseDto> saveStudent(@Validated @PathVariable UUID id) {
     return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
             .body(service.findOneStudent(id));
@@ -44,14 +45,14 @@ public class StudentController {
   }
 
   @PutMapping("/students/{id}")
-  public ResponseEntity<StudentResponseDto> saveStudent(@RequestBody StudentRequestDto dto, @PathVariable UUID id) {
+  public ResponseEntity<StudentResponseDto> saveStudent(@Validated @RequestBody StudentRequestDto dto, @PathVariable UUID id) {
     return ResponseEntity.status(HttpStatus.OK)
             .contentType(MediaType.APPLICATION_JSON)
             .body(service.updateStudent(dto, id));
   }
 
   @DeleteMapping("/students/{id}")
-  public ResponseEntity<?> deleteStudent(@PathVariable UUID id) {
+  public ResponseEntity<?> deleteStudent(@Validated @PathVariable UUID id) {
     service.deleteOneStudent(id);
     return ResponseEntity.noContent().build();
   }
